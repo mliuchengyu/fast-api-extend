@@ -1,0 +1,29 @@
+{
+    "name": "fast-api/extend",
+    "description": "common fast-api/extend",
+    "keywords": [
+        "fast make packages",
+        "laravel api",
+        "laravel extend"
+    ],
+    "require": {
+        "fast-api/permission": "1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Make\\Packages\\": "src/Make/Packages/"
+        },
+        "classmap": [
+
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Make\\Packages\\Providers\\PackagesServiceProvider"
+            ]
+        }
+    }
+}

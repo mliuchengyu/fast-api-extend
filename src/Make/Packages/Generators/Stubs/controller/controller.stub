@@ -1,0 +1,158 @@
+<?php
+
+$NAMESPACE$
+
+use Fast\Api\Permission\Http\Api\Base\Controller;
+use $ROOT_NAMESPACE$Http\Api\Services\$CLASS$\$CONTROLLER$DeleteService;
+use $ROOT_NAMESPACE$Http\Api\Services\$CLASS$\$CONTROLLER$ShowService;
+use $ROOT_NAMESPACE$Http\Api\Services\$CLASS$\$CONTROLLER$StoreService;
+use $ROOT_NAMESPACE$Http\Api\Services\$CLASS$\$CONTROLLER$UpdateService;
+use $ROOT_NAMESPACE$Transformers\$CLASS$Transformer;
+
+
+/**
+ * Class $CONTROLLER$Controller.
+ *
+ * @package $NAMESPACE$
+ */
+class $CONTROLLER$Controller extends Controller
+{
+
+    protected $transformer;
+
+    public function __construct($CONTROLLER$Transformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+
+    /**
+     * @OA\Post(
+     *     path="/api/node_name",
+     *     tags={"XX管理"},
+     *     description="添加XX",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="title",
+     *                     description="菜单名称",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="path",
+     *                     description="菜单路径",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="parent_id",
+     *                     description="父级菜单",
+     *                     type="integer"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="roles",
+     *                     description="权限ID",
+     *                     type="object"
+     *                 ),
+     *                 example={"title": "菜单管理", "path": "/order", "parent_id": 0, "roles": {}}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * )
+     */
+    public function store($CONTROLLER$StoreService $service)
+    {
+        return $this->response->item($service->save(), $this->transformer);
+    }
+
+    /**
+     * @OA\Get (
+     *      path="/api/node_name/{id}",
+     *      operationId="getProjectById",
+     *      tags={"XX管理"},
+     *      description="描述",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="ID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       )
+     * )
+     */
+    public function show($CONTROLLER$ShowService $service, $id)
+    {
+        return $this->response->item($service->show($id), $this->transformer);
+    }
+
+    /**
+     * @OA\Put(
+     *      path="/api/node_name/{id}",
+     *      tags={"XX管理"},
+     *      description="描述",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="ID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       )
+     * )
+     */
+    public function update($CONTROLLER$UpdateService $service, $id)
+    {
+        return $this->response->item($service->update($id), $this->transformer);
+    }
+
+    /**
+     * @OA\Delete (
+     *      path="/api/node_name/{id}",
+     *      tags={"XX管理"},
+     *      description="描述",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="ID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       )
+     * )
+     */
+    public function destroy($CONTROLLER$DeleteService $service, $id)
+    {
+        return $service->delete($id);
+    }
+}

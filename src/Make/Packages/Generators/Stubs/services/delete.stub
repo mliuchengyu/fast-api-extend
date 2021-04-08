@@ -1,0 +1,30 @@
+<?php
+
+$NAMESPACE$
+
+use $ROOT_NAMESPACE$Repository\Contract\$CLASS$Repository;
+use $ROOT_NAMESPACE$Requests\$CLASS$\$CLASS$DeleteRequest;
+
+class $CLASS$DeleteService
+{
+    /**
+     * @var $CLASS$DeleteRequest
+     */
+    protected $request;
+    /**
+     * @var $CLASS$Repository
+     */
+    protected $repository;
+
+    public function __construct($CLASS$DeleteRequest $request, $CLASS$Repository $repository)
+    {
+        $this->request = $request;
+        $this->repository = $repository;
+    }
+
+    public function delete($id)
+    {
+        $this->request->validated();
+        return $this->repository->delete($id);
+    }
+}

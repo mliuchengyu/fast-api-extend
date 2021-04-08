@@ -1,0 +1,30 @@
+<?php
+
+$NAMESPACE$
+
+use $ROOT_NAMESPACE$Repository\Contract\$CLASS$Repository;
+use $ROOT_NAMESPACE$Requests\$CLASS$\$CLASS$ShowRequest;
+
+class $CLASS$ShowService
+{
+    /**
+     * @var $CLASS$ShowRequest
+     */
+    protected $request;
+    /**
+     * @var $CLASS$Repository
+     */
+    protected $repository;
+
+    public function __construct($CLASS$ShowRequest $request, $CLASS$Repository $repository)
+    {
+        $this->request = $request;
+        $this->repository = $repository;
+    }
+
+    public function show($id)
+    {
+        $this->request->validated();
+        return $this->repository->find($id);
+    }
+}
