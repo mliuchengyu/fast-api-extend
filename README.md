@@ -44,7 +44,9 @@ php artisan vendor:publish --provider "Prettus\Repository\Providers\RepositorySe
 ## 生成扩展包
 
 ```sh
-php artisan make:fast-extend-packs User --package="fast-api-demo"
+php artisan fast:packages "ControllerName" --package="packageName"
+
+php artisan fast:bindings --package="tms-erp-client"
 ```
 
 ## bug 建议 贡献和支持

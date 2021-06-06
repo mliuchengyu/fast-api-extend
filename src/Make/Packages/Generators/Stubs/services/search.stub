@@ -1,0 +1,56 @@
+<?php
+$NAMESPACE$
+
+use $ROOT_NAMESPACE$Http\Api\Base\AbstractSearchService;
+use $ROOT_NAMESPACE$Repository\Contract\$CLASS$Repository;
+use $ROOT_NAMESPACE$Repository\Criteria\$CLASS$SearchCriteria;
+use $ROOT_NAMESPACE$Requests\$CLASS$\$CLASS$SearchRequest;
+
+class $CLASS$SearchService extends AbstractSearchService
+{
+    /**
+     *@var $CLASS$SearchRequest $request
+     */
+    protected $request;
+
+    /**
+     *@var $CLASS$Repository $repository
+     */
+    protected $repository;
+
+    public function __construct($CLASS$SearchRequest $request, $CLASS$Repository $repository)
+    {
+        $this->request = $request;
+        $this->repository = $repository;
+    }
+
+    protected function getSearchCriteriaClassName(): string
+    {
+        return $CLASS$SearchCriteria::class;
+    }
+
+    protected function getOrConditionFields(): array
+    {
+        return [];
+    }
+
+    protected function getAndConditionFields(): array
+    {
+        return [];
+    }
+
+    protected function internalAndCondition(): array
+    {
+        return [];
+    }
+
+    protected function getBetweenConditionFields(): array
+    {
+        return [];
+    }
+
+    protected function getWhereInConditionFields(): array
+    {
+        return [];
+    }
+}

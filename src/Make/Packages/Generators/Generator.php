@@ -240,6 +240,9 @@ abstract class Generator
             case ('request' === $class):
                 $path = config('fast-make.generator.paths.request', 'Requests');
                 break;
+            case ('base' === $class):
+                $path = config('fast-make.generator.paths.base', 'Base');
+                break;
             default:
                 $path = '';
         }

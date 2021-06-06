@@ -44,6 +44,7 @@ class PackagesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands('Make\Packages\Generators\Commands\MakeCommand');
+        $this->commands('Make\Packages\Generators\Commands\InitCommand');
     }
 
 

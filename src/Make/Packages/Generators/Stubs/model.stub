@@ -10,10 +10,26 @@ use Prettus\Repository\Traits\TransformableTrait;
  * Class $CLASS$.
  *
  * @package $NAMESPACE$
+ *
+ * @OA\Schema(
+ *     title="$CLASS$ model",
+ *     description="$CLASS$ model",
+ * )
  */
-class $CLASS$ extends Model implements Transformable
+class $CLASS$ extends Model
 {
-    use TransformableTrait;
+    protected $table = '$CLASS$';
+
+    /**
+     * @OA\Property(
+     *     format="int64",
+     *     description="id",
+     *     title="id",
+     * )
+     *
+     * @var integer
+     */
+    private $id;
 
     /**
      * The attributes that are mass assignable.

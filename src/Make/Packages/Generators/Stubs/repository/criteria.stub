@@ -1,0 +1,7 @@
+<?php
+$NAMESPACE$
+use $ROOT_NAMESPACE$Http\Api\Base\AbstractCriteria;
+class $CLASS$SearchCriteria extends AbstractCriteria
+{
+
+}

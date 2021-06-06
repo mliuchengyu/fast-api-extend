@@ -35,21 +35,22 @@ use Symfony\Component\Console\Input\InputOption;
 // | github 仓库地址 ：https://github.com/fast-oopdev/fast-api-permission
 // +----------------------------------------------------------------------
 
-class MakeCommand extends Command
+class InitCommand extends Command
 {
     /**
      * The name of command.
-     * php artisan fast:packages "ControllerName" --package="c"
+     * php artisan fast:bindings --package="tms-erp-client"
      * @var string
      */
-    protected $name = 'fast:packages';
+    protected $name = 'fast:bindings';
 
     /**
      * The description of command.
      *
      * @var string
      */
-    protected $description = 'Create rapid development extension packs.';
+    protected $description = 'Add repository bindings to service provider.';
+
 
     /**
      * @var Collection
@@ -74,80 +75,18 @@ class MakeCommand extends Command
      */
     public function fire()
     {
-        try {
-
-            (new RepositorySearchCriteriaGenerator([
-                'name' => $this->argument('name'),
-                'package'  => $this->option('package')
-            ]))->run();
-            $this->generators = new Collection();
-
-            $migrationGenerator = new MigrationGenerator([
-                'name'   => 'create_' . Str::snake($this->argument('name')) . '_table',
-                'package'  => $this->option('package')
-            ]);
-            $this->generators->push($migrationGenerator);
-
-            $modelGenerator = new ModelGenerator([
-                'name'     => $this->argument('name'),
-                'package'  => $this->option('package')
-            ]);
-            $this->generators->push($modelGenerator);
-
-
-            $this->generators->push(new RepositoryInterfaceGenerator([
-                'name'  => $this->argument('name'),
-                'package'  => $this->option('package')
-            ]));
-
-
-            $model = $modelGenerator->getRootNamespace() . '\\' . $modelGenerator->getName();
-            $model = str_replace([
-                "\\",
-                '/'
-            ], '\\', $model);
-            foreach ($this->generators as $generator) {
-                $generator->run();
-            }
-
-            foreach (['Search', 'Show', 'Update', 'Store', 'Delete'] as $event){
-                (new RequestGenerator([
-                    'name' => $this->argument('name'),
-                    'event'  => $event,
-                    'package' => $this->option('package')
-                ]))->run();
-            }
-
-            (new ControllerGenerator([
-                'name' => $this->argument('name'),
+        try{
+            (new BaseControllerGenerator([
                 'package'  => $this->option('package')
             ]))->run();
 
-            (new RepositoryEloquentGenerator([
-                'name'      => $this->argument('name'),
-                'package'  => $this->option('package'),
-                'model'     => $model,
-            ]))->run();
-
-            (new TransformerGenerator([
-                'name' => $this->argument('name'),
+            (new AbstractCriteriaGenerator([
                 'package'  => $this->option('package')
             ]))->run();
 
-
-//            (new BindingsGenerator([
-//                'name'    => $this->argument('name'),
-//                'package' => $this->option('package')
-//            ]))->run();
-
-            foreach (['search','show','store','update','delete'] as $stub){
-                (new ServicesGenerator([
-                    'name' => $this->argument('name'),
-                    'stub'  => $stub,
-                    'package' => $this->option('package')
-                ]))->run();
-            }
-
+            (new AbstractSearchServiceGenerator([
+                'package'  => $this->option('package')
+            ]))->run();
 
             $this->info($this->description);
         } catch (FileAlreadyExistsException $e) {
@@ -165,12 +104,7 @@ class MakeCommand extends Command
     public function getArguments()
     {
         return [
-            [
-                'name',
-                InputArgument::REQUIRED,
-                'The name of class being generated.',
-                null
-            ],
+
         ];
     }
 

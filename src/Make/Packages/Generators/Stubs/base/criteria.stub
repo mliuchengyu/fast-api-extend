@@ -1,0 +1,52 @@
+<?php
+$NAMESPACE$
+
+use Prettus\Repository\Contracts\CriteriaInterface;
+use Prettus\Repository\Contracts\RepositoryInterface;
+
+abstract class AbstractCriteria implements CriteriaInterface
+{
+    protected $orCondition;
+    protected $andCondition;
+    protected $betweenConditions;
+    protected $whereInConditions;
+    protected $orders;
+
+    public function __construct($orCondition= [], $andCondition = [], $betweenConditions = [], $whereInConditions = [], $orders = [])
+    {
+        $this->orCondition = $orCondition;
+        $this->andCondition = $andCondition;
+        $this->betweenConditions = $betweenConditions;
+        $this->whereInConditions = $whereInConditions;
+        $this->orders = $orders;
+    }
+
+    public function apply($model, RepositoryInterface $repository)
+    {
+        // TODO: Implement apply() method.
+        $tableName = $model->getTable();
+        foreach ($this->andCondition as $field=>$condition) {
+            $model = $model->where($tableName.".".$field, $condition);
+        }
+        foreach ($this->betweenConditions as $field=>$condition) {
+            $model = $model->whereBetween($tableName.".".$field, json_decode($condition, true));
+        }
+        foreach ($this->whereInConditions as $field=>$condition) {
+            $model = $model->whereIn($tableName.".".$field, json_decode($condition, true));
+        }
+        $model = $model->where(function ($query) use ($tableName){
+            foreach ($this->orCondition as $field => $condition){
+                $query->orWhere($tableName.".".$field, 'like', "%$condition%");
+            }
+        });
+        $model = $this->order($model, $tableName);
+        return $model;
+    }
+    protected function order($model, $tableName)
+    {
+        foreach ($this->orders as $field => $order) {
+            $model = $model->orderBy($tableName.'.'.$field, $order);
+        }
+        return $model;
+    }
+}
