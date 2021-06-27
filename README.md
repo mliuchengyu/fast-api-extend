@@ -71,7 +71,7 @@ fast-api-extend 为开源项目，允许把它用于任何地方，不受任何�
 >
 ## 版权和许可
 
-[fast-api/extend](https://github.com/fast-oopdev/fast-api-permission)
+[fast-api/extend](https://github.com/fast-oopdev/fast-api-extend)
 was written by [fast-php](http://www.dnat.link) and is released under the
 [MIT License](LICENSE.md).
 

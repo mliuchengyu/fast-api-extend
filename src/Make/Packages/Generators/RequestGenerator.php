@@ -10,7 +10,7 @@ namespace Make\Packages\Generators;
 // +----------------------------------------------------------------------
 // | 开源协议 ( https://mit-license.org )
 // +----------------------------------------------------------------------
-// | github 仓库地址 ：https://github.com/fast-oopdev/fast-api-permission
+// | github 仓库地址 ：https://github.com/fast-oopdev/fast-api-extend
 // +----------------------------------------------------------------------
 
 class RequestGenerator extends Generator
