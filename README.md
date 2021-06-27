@@ -46,7 +46,7 @@ php artisan vendor:publish --provider "Prettus\Repository\Providers\RepositorySe
 ```sh
 php artisan fast:packages "ControllerName" --package="packageName"
 
-php artisan fast:bindings --package="tms-erp-client"
+php artisan fast:bindings --package="packageName"
 ```
 
 ## bug 建议 贡献和支持
