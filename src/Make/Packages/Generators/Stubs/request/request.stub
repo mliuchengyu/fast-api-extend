@@ -17,4 +17,16 @@ class $CLASS$$EVENT$Request extends FormRequest
             //
         ];
     }
+
+    /**
+     * Gets an error message for a defined validation rule
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            //
+        ];
+    }
 }
